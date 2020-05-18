@@ -1,14 +1,22 @@
 import React from "react";
 import Home from "./components/Home";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Pizza from "./components/Pizza"
 
-const App = () => {
+function App() {
   return (
-<>
-      <h1>Lambda Eats</h1>
-      <div>
-    <Home />
+  <Router>
+      <div>   
+          <nav>  
+              <div>
+      <Link to="/">Home</Link>
+      <Link to="/pizza">Pizza</Link>
+      </div> 
+      </nav>
+      <Route exact path="/" component={Home} />
+        <Route exact path="/pizza" component={Pizza} />
       </div>
-</>
-  );
-};
-export default App;
+  </Router>
+  )
+  }
+  export default App;
