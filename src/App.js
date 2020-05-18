@@ -6,9 +6,10 @@ import Pizza from "./components/Pizza"
 function App() {
   return (
   <Router>
-      <div>   
+      <div class="container">   
           <nav>  
-              <div>
+              <div class="nav">
+                <h1>Lambda Eats</h1>
       <Link to="/">Home</Link>
       <Link to="/pizza">Pizza</Link>
       </div> 
