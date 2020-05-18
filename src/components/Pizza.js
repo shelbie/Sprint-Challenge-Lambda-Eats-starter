@@ -3,7 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 
 const formSchema = yup.object().shape({
-  name: yup.string().required("Name is a required field."),
+  name: yup.string().required("Requires atleast two characters."),
   size: yup
     .string()
     .required("Must select size"),
@@ -15,7 +15,11 @@ const formSchema = yup.object().shape({
 
 });
 
+
+
 export default function Pizza() {
+
+
   // state for whether our button should be disabled or not.
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
@@ -72,8 +76,12 @@ export default function Pizza() {
       .catch(err => console.log(err.response));
   };
 
+
+
   const validateChange = e => {
     // Reach will allow us to "reach" into the schema and test only one part.
+    
+    
     yup
       .reach(formSchema, e.target.name)
       .validate(e.target.value)
@@ -114,13 +122,14 @@ export default function Pizza() {
           value={formState.name}
           onChange={inputChange}
         />
-        {errors.name.length > 0 ? <p className='error'>{errors.name}</p> : null}
+        {errors.name.length > 2 ? <p className='error'>{errors.name}</p> : null}
       </label>
 
 
      <label htmlFor='size'>
         Pizza Size:
         <select id='size' name='size' onChange={inputChange}>
+        <option value='null'>Select One</option>
           <option value='Small'>Small</option>
           <option value='Medium'>Medium</option>
           <option value='Large'>Large</option>
