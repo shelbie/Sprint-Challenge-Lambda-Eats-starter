@@ -3,7 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 
 const formSchema = yup.object().shape({
-  name: yup.string().required("Requires atleast two characters."),
+  name: yup.string().min(2, "Requires at least two characters"),
   size: yup
     .string()
     .required("Must select size"),
@@ -101,6 +101,8 @@ export default function Pizza() {
 
   const inputChange = e => {
     e.persist();
+
+
     const newFormData = {
       ...formState,
       [e.target.name]:
@@ -122,7 +124,7 @@ export default function Pizza() {
           value={formState.name}
           onChange={inputChange}
         />
-        {errors.name.length > 2 ? <p className='error'>{errors.name}</p> : null}
+        {errors.name ? <p className='error'>{errors.name}</p> : null}
       </label>
 
 
@@ -140,7 +142,7 @@ export default function Pizza() {
         ) : null}
       </label>
       <label>Toppings:</label>
-      <label htmlFor='pepperoni' className='pepperoni'>
+      <label htmlFor='pepperoni' className='topping'>
         <input
           type='checkbox'
           name='pepperoni'
@@ -149,7 +151,7 @@ export default function Pizza() {
         />
         Pepperoni
       </label>
-      <label htmlFor='sausage' className='sausage'>
+      <label htmlFor='sausage' className='topping'>
         <input
           type='checkbox'
           name='sausage'
@@ -158,7 +160,7 @@ export default function Pizza() {
         />
         Sausage
       </label>
-      <label htmlFor='ham' className='ham'>
+      <label htmlFor='ham' className='topping'>
         <input
           type='checkbox'
           name='ham'
@@ -167,7 +169,7 @@ export default function Pizza() {
         />
         Ham
       </label>
-      <label htmlFor='meatlovers' className='meatlovers'>
+      <label htmlFor='meatlovers' className='topping'>
         <input
           type='checkbox'
           name='meatlovers'
